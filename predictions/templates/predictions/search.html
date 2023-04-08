@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-md-12">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb pl-0">
+                <li class="breadcrumb-item"><a href="{% url 'accounts:home' %}"><i class="material-icons">home</i> Home</a></li>
+                <li class="breadcrumb-item"><a href="">Predictions</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Search</li>
+            </ol>
+        </nav>
+    </div>
+    <div class="col-xl-12 col-md-12">
+        <div class="ms-panel">
+            <div class="ms-panel-header ms-panel-custome">
+                <h6>Search</h6>
+                <a href="{% url 'doctors:doctors' %}" class="ms-text-primary"></a>
+            </div>
+            <div class="ms-panel-body">
+                <form class="needs-validation" method="post" enctype="multipart/form-data">
+                    
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom0005">Symptom 1</label>
+                            <div class="input-group">
+                                {{form.symptom1}}
+
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-2">
+                            <label for="validationCustom6">Symptom 2</label>
+                            <div class="input-group">
+                                {{form.symptom2}}
+
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="col-md-6 mb-2">
+                            <label for="validationCustom009">Symptom 3</label>
+                            <div class="input-group">
+                                {{form.symptom3}}
+
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom009">Symptom 4</label>
+                            <div class="input-group">
+                                {{form.symptom4}}
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-6 mb-2">
+                            <label for="validationCustom009">Symptom 5</label>
+                            <div class="input-group">
+                                {{form.symptom5}}
+
+                            </div>
+                        </div>
+                       
+                    </div>
+                    {% csrf_token %}
+                    <button class="btn btn-primary mt-4 d-inline w-20" type="submit">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

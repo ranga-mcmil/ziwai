@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb pl-0">
+                <li class="breadcrumb-item"><a href="{% url 'accounts:home' %}"><i class="material-icons">home</i> Home</a></li>
+                <li class="breadcrumb-item"><a href="">Payments</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Payments List</li>
+            </ol>
+        </nav>
+        <div class="ms-panel">
+            <div class="ms-panel-header ms-panel-custome">
+                <h6>Payment List</h6>
+                <a href="{% url 'appointments:new' %}" class="ms-text-primary"></a>
+            </div>
+
+            <div class="ms-panel-body">
+                <div class="table-responsive">
+                    <table id="data-table-2" class="table table-striped thead-primary w-100 dataTable no-footer"
+                        role="grid" aria-describedby="data-table-2_info" style="width: 720px;">
+                        <thead>
+                            <tr role="row">
+                                <th class="" tabindex="0" aria-controls="data-table-2" rowspan="1"
+                                    colspan="1" aria-sort="ascending"
+                                     style="width: 37px;">Patient</th>
+                                <th class="" tabindex="0" aria-controls="data-table-2" rowspan="1" colspan="1"
+                                    aria-label="Address: activate to sort column " style="width: 51px;">Amount
+                                </th>
+                                <th class="" tabindex="0" aria-controls="data-table-2" rowspan="1" colspan="1"
+                                    aria-label="Disease: activate to sort column ascending" style="width: 49px;">Invoice ID
+                                </th>
+                                <th class="" tabindex="0" aria-controls="data-table-2" rowspan="1" colspan="1"
+                                    aria-label="Age: activate to sort column ascending" style="width: 25px;">Date
+                                </th>
+                                
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            {% for payment in payments %}
+                                <tr role="row" class="odd">
+                                    <td class="sorting_1"><img src="{{payment.patient.user.pic.url}}"> {{payment.patient.user.get_full_name}}</td>
+                                    <td>$ {{ payment.amount }}</td>
+                                    <td>INV00{{payment.invoice.id}}</td>
+                                    <td>{{payment.date_created}}</td>
+                                    
+                                </tr>
+                            {% endfor %}
+                            
+
+
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

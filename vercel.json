@@ -1,0 +1,14 @@
+{
+    "builds": [
+        {
+            "src": "ziwai/wsgi.py",
+            "use": "@vercel/python"
+        }
+    ],
+    "routes": [
+        {
+            "src": "/(.*)",
+            "dest": "ziwai/wsgi.py"
+        }
+    ]
+}

@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb pl-0">
+                <li class="breadcrumb-item"><a href="#"><i class="material-icons">home</i> Home</a></li>
+                <li class="breadcrumb-item"><a href="#">Payment</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Payment-Invoice</li>
+            </ol>
+        </nav>
+        <div class="ms-panel">
+            <div class="ms-panel-header header-mini">
+                <div class="d-flex justify-content-between">
+                    <h6>Invoice</h6>
+                    <h6>INV00{{invoice.id}}</h6>
+                </div>
+            </div>
+            <div class="ms-panel-body">
+                <!-- Invoice To -->
+                <div class="row align-items-center">
+                    <div class="col-md-6">
+                        <div class="invoice-address">
+                            <h3>For: </h3>
+                            <h5>{{invoice.patient.user.get_full_name}}</h5>
+                            <p>{{invoice.patient.user.email}}</p>
+                            <p class="mb-0">{{invoice.patient.user.address}}</p>
+                            <p>Zimbabwe</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 text-md-right">
+                        <ul class="invoice-date">
+                            <li>Invoice Date : {{invoice.date_created}}</li>
+                            <li>Due Date : {{invoice.due_date}}</li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- Invoice Table -->
+                <div class="ms-invoice-table table-responsive mt-5">
+                    <table class="table table-hover text-right thead-light">
+                        <thead>
+                            <tr class="text-capitalize">
+                                <th class="text-center w-5">id</th>
+                                <th class="text-left">Item Name</th>
+                                <th>Qty</th>
+                                <th>Unit Cost</th>
+                                <th>total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for item in invoice.invoice_items.all%}
+                                <tr>
+                                    <td class="text-center">{{forloop.counter}}</td>
+                                    <td class="text-left">{{item.name}}</td>
+                                    <td>1</td>
+                                    <td>${{item.price}}</td>
+                                    <td>${{item.price}}</td>
+                                </tr>
+                            {% endfor %}
+
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="4">Total Cost: </td>
+                                <td>${{invoice.get_amount}}</td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+                {% if invoice.status == 'Paid' %}
+                    <div class="invoice-buttons text-right">
+                        <a href="" class="btn btn-success">Paid</a>
+                    </div>
+                {% else %}
+                    <div class="invoice-buttons text-right">
+                        <a href="{% url 'payments:new' invoice.id %}" disabled class="btn  btn-primary">Make Payment</a>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

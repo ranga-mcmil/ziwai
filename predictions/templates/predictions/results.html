@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-md-12">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb pl-0">
+                <li class="breadcrumb-item"><a href="{% url 'accounts:home' %}"><i class="material-icons">home</i> Home</a></li>
+                <li class="breadcrumb-item"><a href="{% url 'predictions:search' %}">Predictions</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Results</li>
+            </ol>
+        </nav>
+    </div>
+    <div class="col-xl-12 col-md-12">
+
+        <div class="ms-panel">
+            <div class="ms-panel-header">
+                <h6>Results</h6>
+            </div>
+            <div class="ms-panel-body">
+                <div class="accordion" id="accordionExample3">
+                    <div class="card">
+                        <div class="card-header" data-toggle="collapse" role="button" data-target="#collapseSeven" aria-expanded="true" aria-controls="collapseSeven">
+                        <span class="has-icon"> <i class="flaticon-conversation"></i> Test 1 </span>
+                        </div>
+                        <div id="collapseSeven" class="collapse show" data-parent="#accordionExample3">
+                        <div class="card-body">
+                            You might have <b>{{test1}}</b>
+                        </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header" data-toggle="collapse" role="button" data-target="#collapseEight" aria-expanded="false" aria-controls="collapseEight">
+                        <span class="has-icon"> <i class="flaticon-conversation"></i> Test 2 </span>
+                        </div>
+                        <div id="collapseEight" class="collapse" data-parent="#accordionExample3">
+                        <div class="card-body">
+                            You might have <b>{{test2}}</b>
+                        </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header" data-toggle="collapse" role="button" data-target="#collapseNine" aria-expanded="false" aria-controls="collapseNine">
+                        <span class="has-icon"> <i class="flaticon-conversation"></i> Test 3 </span>
+                        </div>
+                        <div id="collapseNine" class="collapse" data-parent="#accordionExample3">
+                        <div class="card-body">
+                            You might have <b>{{test3}}</b>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endblock %}

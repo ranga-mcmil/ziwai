@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+
+{% block content %} 
+
+<div class="row">
+  
+    <!-- Notifications Widgets -->
+    {% if not user.user_type == 'Doctor' %}
+    <div class="col-xl-6 col-md-6 col-sm-6">
+      <a href="{% url 'doctors:doctors' %}">
+        <div class="ms-card card-gradient-custom ms-widget ms-infographics-widget ms-p-relative">
+          <div class="ms-card-body media">
+            <div class="media-body">
+              <h6>Doctors</h6>
+              <p class="ms-card-change"> {{doctors}}</p>
+            </div>
+          </div>
+          <i class="fas fa-stethoscope ms-icon-mr"></i>
+        </div>
+      </a>
+    </div>
+    {% endif %}
+
+    
+    <div class="col-xl-6 col-md-6 col-sm-6">
+      <a href="{% url 'appointments:appointments' %}">
+        <div class="ms-card card-gradient-custom ms-widget ms-infographics-widget ms-p-relative">
+          <div class="ms-card-body media">
+            <div class="media-body">
+              <h6>Appointments</h6>
+              <p class="ms-card-change"> {{appointments}}</p>
+            </div>
+          </div>
+          <i class="fas fa-calendar ms-icon-mr"></i>
+        </div>
+      </a>
+    </div>
+
+    {% if not user.user_type == 'Patient' %}
+      <div class="col-xl-6 col-md-6 col-sm-6">
+        <a href="{% url 'patients:patients' %}">
+          <div class="ms-card card-gradient-custom ms-widget ms-infographics-widget ms-p-relative">
+            <div class="ms-card-body media">
+              <div class="media-body">
+                <h6 class="bold">Patients</h6>
+                <p class="ms-card-change"> {{patients}}</p>
+              </div>
+            </div>
+            <i class="fa fa-wheelchair ms-icon-mr"></i>
+          </div>
+        </a>
+      </div>
+    {% endif %}
+
+    {% if user.user_type == 'Receptionist' %}
+      <div class="col-xl-6 col-md-6 col-sm-6">
+        <a href="{% url 'payments:payments' %}">
+          <div class="ms-card card-gradient-custom ms-widget ms-infographics-widget ms-p-relative">
+            <div class="ms-card-body media">
+              <div class="media-body">
+                <h6 class="bold">Payments</h6>
+                <p class="ms-card-change"> $ 4567</p>
+              </div>
+            </div>
+            <i class="fas fa-money-bill ms-icon-mr"></i>
+          </div>
+        </a>
+      </div>
+    {% endif %}
+
+    {% if not user.user_type == 'Receptionist' %}
+      <div class="col-xl-6 col-md-6 col-sm-6">
+        <a href="{% url 'patients:prescriptions' %}">
+          <div class="ms-card card-gradient-custom ms-widget ms-infographics-widget ms-p-relative">
+            <div class="ms-card-body media">
+              <div class="media-body">
+                <h6 class="bold">Prescriptions</h6>
+                <p class="ms-card-change"> {{ prescriptions }}</p>
+              </div>
+            </div>
+            <i class="fas fa-money-bill ms-icon-mr"></i>
+          </div>
+        </a>
+      </div>
+    {% endif %}
+  </div>
+  
+
+{% endblock %}

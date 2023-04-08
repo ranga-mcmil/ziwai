@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb pl-0">
+                <li class="breadcrumb-item"><a href="{% url 'accounts:home' %}"><i class="material-icons">home</i> Home</a></li>
+                <li class="breadcrumb-item"><a href="#">Invoices</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Invoice List</li>
+            </ol>
+        </nav>
+        <div class="ms-panel">
+            <div class="ms-panel-header ms-panel-custome">
+                <h6>Invoice List</h6>
+                {% if user.user_type == 'Receptionist' %}
+                    <a href="{% url 'payments:new_invoice' %}" class="ms-text-primary">Add Invoice</a>
+                {% endif %}
+            </div>
+
+            <div class="ms-panel-body">
+                <div class="table-responsive">
+                    <table id="data-table-2" class="table table-striped thead-primary w-100 dataTable no-footer"
+                        role="grid" aria-describedby="data-table-2_info" style="width: 720px;">
+                        <thead>
+                            <tr role="row">
+                                <th class="" tabindex="0" aria-controls="data-table-2" rowspan="1"
+                                    colspan="1" aria-sort="ascending"
+                                     style="width: 37px;">Patient</th>
+                                <th class="" tabindex="0" aria-controls="data-table-2" rowspan="1" colspan="1"
+                                    aria-label="Address: activate to sort column " style="width: 51px;">Date Due
+                                </th>
+                                <th class="" tabindex="0" aria-controls="data-table-2" rowspan="1" colspan="1"
+                                    aria-label="Disease: activate to sort column ascending" style="width: 49px;">Invoice For
+                                </th>
+                                <th class="" tabindex="0" aria-controls="data-table-2" rowspan="1" colspan="1"
+                                    aria-label="Age: activate to sort column ascending" style="width: 25px;">Status
+                                </th>
+                                
+                                <th class="" tabindex="0" aria-controls="data-table-2" rowspan="1" colspan="1"
+                                    aria-label="Action: activate to sort column ascending" style="width: 42px;">Action
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            {% for invoice in invoices %}
+                                <tr role="row" class="odd">
+                                    <td class="sorting_1"><img src="{{invoice.patient.user.pic.url}}"> {{invoice.patient.user.get_full_name}}</td>
+                                    <td>{{ invoice.due_date }}</td>
+                                    <td>{% for item in invoice.invoice_items.all%}{{item}}, {% endfor %}</td>
+                                    <td>{{invoice.status}}</td>
+                                    <td>
+                                        
+                                        <a href="{% url 'payments:invoice' invoice.id %}"><i class="fas fa-info-circle ms-text-"></i></a> 
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            
+
+
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

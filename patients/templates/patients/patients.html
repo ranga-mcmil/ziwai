@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb pl-0">
+                <li class="breadcrumb-item"><a href="{% url 'accounts:home' %}"><i class="material-icons">home</i> Home</a></li>
+                <li class="breadcrumb-item"><a href="">Patient</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Patient List</li>
+            </ol>
+        </nav>
+        <div class="ms-panel">
+            <div class="ms-panel-header ms-panel-custome">
+                <h6>Patient List</h6>
+                {% if user.user_type == 'Receptionist' %}
+                    <a href="{% url 'patients:new' %}" class="ms-text-primary">Add Patient</a>
+                {% endif%}
+            </div>
+
+            <div class="ms-panel-body">
+                <div class="table-responsive">
+                    <table id="data-table-2" class="table table-striped thead-primary w-100 dataTable no-footer"
+                        role="grid" aria-describedby="data-table-2_info" style="width: 720px;">
+                        <thead>
+                            <tr role="row">
+                                <th class="" tabindex="0" aria-controls="data-table-2" rowspan="1"
+                                    colspan="1" aria-sort="ascending"
+                                     style="width: 37px;">Name</th>
+                                <th class="" tabindex="0" aria-controls="data-table-2" rowspan="1" colspan="1"
+                                    aria-label="Address: activate to sort column " style="width: 51px;">Address
+                                </th>
+                                <th class="" tabindex="0" aria-controls="data-table-2" rowspan="1" colspan="1"
+                                    aria-label="Disease: activate to sort column ascending" style="width: 49px;">Doctor
+                                </th>
+                                <th class="" tabindex="0" aria-controls="data-table-2" rowspan="1" colspan="1"
+                                    aria-label="Age: activate to sort column ascending" style="width: 25px;">D.O.B</th>
+                                
+                                <th class="" tabindex="0" aria-controls="data-table-2" rowspan="1" colspan="1"
+                                    aria-label="Email: activate to sort column ascending" style="width: 182px;">Email
+                                </th>
+                                <th class="" tabindex="0" aria-controls="data-table-2" rowspan="1" colspan="1"
+                                    aria-label="Action: activate to sort column ascending" style="width: 42px;">Action
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            {% for patient_profile in patient_profiles %}
+                                <tr role="row" class="odd">
+                                    <td class="sorting_1"><img src="{{patient_profile.user.pic.url}}"> {{patient_profile.user.last_name}}</td>
+                                    <td>{{ patient_profile.user.address }}</td>
+                                    <td>{{patient_profile.doctor.user.last_name}}</td>
+                                    <td>{{patient_profile.user.date_of_birth}}</td>
+                                    <td>{{patient_profile.user.email}}</td>
+                                    <td>
+                                        {% if user.user_type == 'Receptionist' %}
+                                            <a href="{% url 'patients:edit' patient_profile.id %}"><i class="fas fa-pencil-alt ms-text-primary"></i></a> 
+                                            <a href="{% url 'patients:delete' patient_profile.id %}"><i class="far fa-trash-alt ms-text-danger"></i></a>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            
+
+
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

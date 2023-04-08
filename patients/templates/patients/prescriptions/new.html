@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block content %} 
+<div class="row">
+    <div class="col-md-12">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb pl-0">
+                <li class="breadcrumb-item"><a href="#"><i class="material-icons">home</i> Home</a></li>
+                <li class="breadcrumb-item"><a href="#">Patients</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Prescription</li>
+            </ol>
+        </nav>
+    </div>
+    <div class="col-xl-12 col-md-12">
+        <div class="ms-panel">
+            <div class="ms-panel-header ms-panel-custome">
+                <h6>Add Prescription</h6>
+                <a href="{% url 'patients:prescriptions' %}" class="ms-text-primary">Prescription List</a>
+            </div>
+            <div class="ms-panel-body">
+                <form class="needs-validation" method="post" enctype="multipart/form-data">
+                    <div class="form-row">
+                        <div class="col-md-12 mb-3">
+                            <label for="validationCustom0001">Patient</label>
+                            <div class="input-group">
+                                {{form.patient}}
+
+                            </div>
+                        </div>
+                        <div class="col-md-12 mb-3">
+                            <label for="validationCustom0002">Notes</label>
+                            <div class="input-group">
+                                {{form.notes}}
+
+                            </div>
+                        </div>
+                    </div>
+
+
+                    {% csrf_token %}
+                    <button class="btn btn-primary mt-4 d-inline w-20" type="submit">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %} 

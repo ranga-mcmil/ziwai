@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb pl-0">
+                <li class="breadcrumb-item"><a href="#"><i class="material-icons">home</i> Home</a></li>
+                <li class="breadcrumb-item"><a href="#">Prescription</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Prescription List</li>
+            </ol>
+        </nav>
+        <div class="ms-panel">
+            <div class="ms-panel-header ms-panel-custome">
+                <h6>Prescription List</h6>
+                {% if not user.user_type == 'Patient' %}
+                    <a href="{% url 'patients:new_prescription' %}" class="ms-text-primary">Add Prescription</a>
+                {% endif %}
+            </div>
+
+            <div class="ms-panel-body">
+                <div class="table-responsive">
+                    <table id="data-table-2" class="table table-striped thead-primary w-100 dataTable no-footer"
+                        role="grid" aria-describedby="data-table-2_info" style="width: 720px;">
+                        <thead>
+                            <tr role="row">
+                                <th class="" tabindex="0" aria-controls="data-table-2" rowspan="1"
+                                    colspan="1" aria-sort="ascending"
+                                     style="width: 37px;">Patient</th>
+                                <th class="" tabindex="0" aria-controls="data-table-2" rowspan="1" colspan="1"
+                                    aria-label="Address: activate to sort column " style="width: 51px;">Doctor
+                                </th>
+                                <th class="" tabindex="0" aria-controls="data-table-2" rowspan="1" colspan="1"
+                                    aria-label="Disease: activate to sort column ascending" style="width: 49px;">Notes
+                                </th>
+                                <th class="" tabindex="0" aria-controls="data-table-2" rowspan="1" colspan="1"
+                                    aria-label="Age: activate to sort column ascending" style="width: 25px;">Date Created
+                                </th>
+                                
+                                <th class="" tabindex="0" aria-controls="data-table-2" rowspan="1" colspan="1"
+                                    aria-label="Action: activate to sort column ascending" style="width: 42px;">Action
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            {% for prescription in prescriptions %}
+                                <tr role="row" class="odd">
+                                    <td class="sorting_1"><img src="{{prescription.patient.user.pic.url}}"> {{prescription.patient.user.get_full_name}}</td>
+                                    <td>{{prescription.doctor.user.get_full_name}}</td>
+                                    <td>{{prescription.notes}}</td>
+                                    <td>{{prescription.date_created}}</td>
+                                    <td>
+                                        <a href="{% url 'patients:prescription' prescription.id %}"><i class="fas fa-pencil-alt ms-text-primary"></i></a> 
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            
+
+
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

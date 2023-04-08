@@ -1,0 +1,130 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-md-12">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb pl-0">
+                <li class="breadcrumb-item"><a href="#"><i class="material-icons">home</i> Home</a></li>
+                <li class="breadcrumb-item"><a href="#">Doctor</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Add Doctors</li>
+            </ol>
+        </nav>
+    </div>
+    <div class="col-xl-12 col-md-12">
+        <div class="ms-panel">
+            <div class="ms-panel-header ms-panel-custome">
+                <h6>Add Doctors</h6>
+                <a href="{% url 'doctors:doctors' %}" class="ms-text-primary">Doctors List</a>
+            </div>
+            <div class="ms-panel-body">
+                <form class="needs-validation" method="post" enctype="multipart/form-data">
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom0001">First Name</label>
+                            <div class="input-group">
+                                {{form.first_name}}
+                                
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom0002">Last name</label>
+                            <div class="input-group">
+                                {{form.last_name}}
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom0003">Email Address</label>
+                            <div class="input-group">
+                                {{form.email}}
+
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-2">
+                            <label for="validationCustom0004">Address</label>
+                            <div class="input-group">
+                                {{form.address}}
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom0003">Create Password</label>
+                            <div class="input-group">
+                                {{form.password}}
+
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-2">
+                            <label for="validationCustom0004">Confirm Password</label>
+                            <div class="input-group">
+                                {{form.password2}}
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom0005">Mobile</label>
+                            <div class="input-group">
+                                {{form.mobile_number}}
+
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-2">
+                            <label for="validationCustom6">Department</label>
+                            <div class="input-group">
+                                {{profile_form.department}}
+
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="col-md-6 mb-2">
+                            <label for="validationCustom009">Blood Group</label>
+                            <div class="input-group">
+                                {{form.blood_group}}
+
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label>Sex</label>
+                            {{form.sex}}
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                            <label>Date of Birth</label>
+                            <div class="input-group">
+                                {{form.date_of_birth}}
+
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6 mb-3">
+                            <label>Doctor Image</label>
+                            <div class="custom-file">
+                                {{form.pic}}
+
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <div class="form-row">
+                        
+                    </div>
+                    {% csrf_token %}
+                    <button class="btn btn-primary mt-4 d-inline w-20" type="submit">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %} 
+    {% if form.errors %}
+        <p>
+            {{ form.errors }}
+        </p>
+    {% endif %}
+
+    {% if profile_form.errors %}
+        <p>
+            {{ profile_form.errors }}
+        </p>
+    {% endif %}
+
+
+    <form action="" method="post" enctype="multipart/form-data">
+        {{form.as_p}}
+        {% csrf_token %}
+        <button type="submit">Submit</button>
+    </form>
+{% endblock %} 

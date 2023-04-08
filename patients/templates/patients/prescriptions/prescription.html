@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb pl-0">
+                <li class="breadcrumb-item"><a href="#"><i class="material-icons">home</i> Home</a></li>
+                <li class="breadcrumb-item"><a href="#">Payment</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Payment-Invoice</li>
+            </ol>
+        </nav>
+        <div class="ms-panel">
+            <div class="ms-panel-header header-mini">
+                <div class="d-flex justify-content-between">
+                    <h6>Prescription</h6>
+                    <h6>PRSC00{{prescription.id}}</h6>
+                </div>
+            </div>
+            <div class="ms-panel-body">
+                <!-- Invoice To -->
+                <div class="row align-items-center">
+                    <div class="col-md-6">
+                        <div class="invoice-address">
+                            <h3>For: </h3>
+                            <h5>{{prescription.patient.user.get_full_name}}</h5>
+                            <p>{{prescription.patient.user.email}}</p>
+                            <p class="mb-0">{{prescription.patient.user.address}}</p>
+                            <p>Zimbabwe</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 text-md-right">
+                        <ul class="invoice-date">
+                            <li>Prescription Date : {{prescription.date_created}}</li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- Invoice Table -->
+                <div class="ms-invoice-table table-responsive mt-5">
+                    <h6>Notes</h6>
+                    {{prescription.notes}}
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

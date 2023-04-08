@@ -1,0 +1,508 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>ZIWAI</title>
+  <!-- Iconic Fonts -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+  <link rel="stylesheet" href="{% static 'vendors/iconic-fonts/font-awesome/css/all.min.css' %}">
+  <link rel="stylesheet" href="{% static 'vendors/iconic-fonts/flat-icons/flaticon.css' %}">
+  <link rel="stylesheet" href="{% static 'vendors/iconic-fonts/cryptocoins/cryptocoins.css' %}">
+  <link rel="stylesheet" href="{% static 'vendors/iconic-fonts/cryptocoins/cryptocoins-colors.css' %}">
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}">
+
+  <!-- jQuery UI -->
+  <link rel="stylesheet" href="{% static 'assets/css/jquery-ui.min.css' %}">
+
+  <!-- Page Specific CSS (Slick Slider.css) -->
+  <link rel="stylesheet" href="{% static 'assets/css/slick.css' %}">
+
+  <!-- medjestic styles -->
+  <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+
+  <!-- Page Specific CSS (Morris Charts.css) -->
+  <link rel="stylesheet" href="{% static 'assets/css/morris.css' %}">
+
+</head>
+
+<body class="ms-body ms-aside-left-open ms-primary-theme ms-has-quickbar">
+
+  <!-- Preloader -->
+  <div id="preloader-wrap">
+    <div class="spinner spinner-8">
+      <div class="ms-circle1 ms-child"></div>
+      <div class="ms-circle2 ms-child"></div>
+      <div class="ms-circle3 ms-child"></div>
+      <div class="ms-circle4 ms-child"></div>
+      <div class="ms-circle5 ms-child"></div>
+      <div class="ms-circle6 ms-child"></div>
+      <div class="ms-circle7 ms-child"></div>
+      <div class="ms-circle8 ms-child"></div>
+      <div class="ms-circle9 ms-child"></div>
+      <div class="ms-circle10 ms-child"></div>
+      <div class="ms-circle11 ms-child"></div>
+      <div class="ms-circle12 ms-child"></div>
+    </div>
+  </div>
+  <!-- Overlays -->
+  <div class="ms-aside-overlay ms-overlay-left ms-toggler" data-target="#ms-side-nav" data-toggle="slideLeft"></div>
+  <div class="ms-aside-overlay ms-overlay-right ms-toggler" data-target="#ms-recent-activity" data-toggle="slideRight">
+  </div>
+  <!-- Sidebar Navigation Left -->
+  <aside id="ms-side-nav" class="side-nav fixed ms-aside-scrollable ms-aside-left">
+    <!-- Logo -->
+    <div class="logo-sn ms-d-block-lg">
+      <a class="pl-0 ml-0 text-center" href="{% url 'accounts:home' %}"> <h1 style="color: whitesmoke;">Ziwai</h1>
+      </a>
+      <a href="#" class="text-center ms-logo-img-link"> <img src="{{user.pic.url}}" alt="logo"></a>
+      <h5 class="text-center text-white mt-2">{{ user.get_full_name }}</h5>
+      <h6 class="text-center text-white mb-3">{{ user.user_type }}</h6>
+    </div>
+    <!-- Navigation -->
+    <ul class="accordion ms-main-aside fs-14" id="side-nav-accordion">
+      <!-- Dashboard -->
+      <li class="menu-item">
+        <a href="#" class="has-chevron" data-toggle="collapse" data-target="#dashboard" aria-expanded="false"
+          aria-controls="dashboard">
+          <span><i class="material-icons fs-16">dashboard</i>Dashboard </span>
+        </a>
+        <ul id="dashboard" class="collapse" aria-labelledby="dashboard" data-parent="#side-nav-accordion">
+          <li> <a href="{% url 'accounts:home' %}">Ziwai</a> </li>
+        </ul>
+      </li>
+      <!-- /Dashboard -->
+      <!-- Doctor -->
+      <li class="menu-item">
+        <a href="#" class="has-chevron" data-toggle="collapse" data-target="#doctor" aria-expanded="false"
+          aria-controls="doctor">
+          <span><i class="fas fa-stethoscope"></i>Doctor</span>
+        </a>
+        <ul id="doctor" class="collapse" aria-labelledby="doctor" data-parent="#side-nav-accordion">
+          {% if user.user_type == 'Receptionist' %}
+            <li> <a href="{% url 'doctors:new' %}">Add Doctor</a> </li>
+          {% endif %}
+          <li> <a href="{% url 'doctors:doctors' %}">Doctor List</a> </li>
+        </ul>
+      </li>
+      <!-- Doctor -->
+      <!-- Patient -->
+      <li class="menu-item">
+        <a href="#" class="has-chevron" data-toggle="collapse" data-target="#patient" aria-expanded="false"
+          aria-controls="patient">
+          <span><i class="fas fa-user"></i>Patient</span>
+        </a>
+        <ul id="patient" class="collapse" aria-labelledby="patient" data-parent="#side-nav-accordion">
+          {% if user.user_type == 'Receptionist' %}
+            <li> <a href="{% url 'patients:new' %}">Add Patient</a> </li>
+          {% endif %}
+          <li> <a href="{% url 'patients:patients' %}">Patient List</a> </li>
+        </ul>
+      </li>
+      <!-- /Patient -->
+
+
+      <!-- /Schedule -->
+      <!-- Appointment -->
+      <li class="menu-item">
+        <a href="#" class="has-chevron" data-toggle="collapse" data-target="#appointment" aria-expanded="false"
+          aria-controls="appointment">
+          <span><i class="far fa-check-square"></i>Appointment</span>
+        </a>
+        <ul id="appointment" class="collapse" aria-labelledby="appointment" data-parent="#side-nav-accordion">
+          {% if user.user_type == 'Receptionist' %}
+          <li> <a href="{% url 'appointments:new' %}">Add Appointment</a> </li>
+          {% endif %}
+          <li> <a href="{% url 'appointments:appointments' %}">Appointment List</a> </li>
+        </ul>
+      </li>
+      <!-- /Appointment -->
+      <li class="menu-item">
+        <a href="#" class="has-chevron" data-toggle="collapse" data-target="#prescriptionn" aria-expanded="false"
+          aria-controls="doctor">
+          <span><i class="fas fa-book"></i>Prescription</span>
+        </a>
+        <ul id="prescriptionn" class="collapse" aria-labelledby="doctor" data-parent="#side-nav-accordion">
+          {% if user.user_type == 'Doctor' %}
+            <li> <a href="{% url 'patients:new_prescription' %}">Add Prescription</a> </li>
+          {% endif %}
+          <li> <a href="{% url 'patients:prescriptions' %}">Prescription List</a> </li>
+        </ul>
+      </li>
+      <!-- Payment -->
+      {% if not user.user_type == 'Doctor' %}
+        <li class="menu-item">
+          <a href="#" class="has-chevron" data-toggle="collapse" data-target="#payment" aria-expanded="false"
+            aria-controls="payment">
+            <span><i class="fas fa-credit-card"></i>Payment</span>
+          </a>
+          <ul id="payment" class="collapse" aria-labelledby="payment" data-parent="#side-nav-accordion">
+            <li> <a href="{% url 'payments:payments' %}">Payment List</a> </li>
+            {% if user.user_type == 'Receptionist' %}
+              <li> <a href="{% url 'payments:new_invoice' %}">Add Invoice</a> </li>
+            {% endif %}
+            <li> <a href="{% url 'payments:invoices' %}">Invoice List</a> </li>
+          </ul>
+        </li>
+      {% endif %}
+
+      <li class="menu-item">
+        <a href="{% url 'accounts:logout' %}" class="has-chevron">
+          <span><i class="fas fa-lock"></i>Logout
+        </a>
+        
+      </li>
+
+
+
+    </ul>
+  </aside>
+  <!-- Sidebar Right -->
+
+  <!-- Main Content -->
+  <main class="body-content">
+    <!-- Navigation Bar -->
+    <nav class="navbar ms-navbar">
+      <div class="ms-aside-toggler ms-toggler pl-0" data-target="#ms-side-nav" data-toggle="slideLeft">
+        <span class="ms-toggler-bar bg-white"></span>
+        <span class="ms-toggler-bar bg-white"></span>
+        <span class="ms-toggler-bar bg-white"></span>
+      </div>
+      <div class="logo-sn logo-sm ms-d-block-sm">
+        <a class="pl-0 ml-0 text-center navbar-brand mr-0" style="color: whitesmoke;" href="{% url 'accounts:home' %}">Ziwai </a>
+      </div>
+      <ul class="ms-nav-list ms-inline mb-0" id="ms-nav-options">
+        {% if user.user_type == 'Receptionist' %}
+          <li class="ms-nav-item  ms-d-none">
+            <a href="#mymodal" class="text-white" data-toggle="modal"><i class="flaticon-spreadsheet mr-2"></i> Make an
+              appointment</a>
+          </li>
+        {% endif %}
+
+        {% if user.user_type == 'Doctor' %}
+          <li class="ms-nav-item ms-d-none">
+            <a href="#prescription" class="text-white" data-toggle="modal"><i class="flaticon-pencil mr-2"></i> Write a
+              prescription</a>
+          </li>
+        {% endif %}
+
+        {% if user.user_type == 'Patient' %}
+          <li class="ms-nav-item ms-d-none">
+            <a href="{% url 'predictions:search' %}" class="text-white"><i class="flaticon-spreadsheet mr-2"></i> Input Symptoms</a>
+          </li>
+        {% endif %}
+
+
+        <li class="ms-nav-item ms-nav-user dropdown">
+          <a href="#" id="userDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <img
+              class="ms-user-img ms-img-round float-right" src="{{user.pic.url}}" alt="people"> </a>
+          <ul class="dropdown-menu dropdown-menu-right user-dropdown" aria-labelledby="userDropdown">
+            <li class="dropdown-menu-header">
+              <h6 class="dropdown-header ms-inline m-0"><span class="text-disabled">{{user.get_full_name}}</span></h6>
+            </li>
+            <li class="dropdown-divider"></li>
+            <li class="ms-dropdown-list">
+              <a class="media fs-14 p-2" href=""> <span><i
+                    class="flaticon-user mr-2"></i> Profile</span> </a>
+            </li>
+            <li class="dropdown-divider"></li>
+
+            <li class="dropdown-menu-footer">
+              <a class="media fs-14 p-2" href="{% url 'accounts:logout' %}"> <span><i
+                    class="flaticon-shut-down mr-2"></i> Logout</span> </a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+      <div class="ms-toggler ms-d-block-sm pr-0 ms-nav-toggler" data-toggle="slideDown" data-target="#ms-nav-options">
+        <span class="ms-toggler-bar bg-white"></span>
+        <span class="ms-toggler-bar bg-white"></span>
+        <span class="ms-toggler-bar bg-white"></span>
+      </div>
+    </nav>
+    <!-- Body Content Wrapper -->
+    <div class="ms-content-wrapper">
+
+
+
+
+
+
+      
+
+      {% if form.errors %}
+        {% include 'form_messages.html' with errors=form.errors %}
+      {% endif %}
+
+      {% if profile_form.errors %}
+        {% include 'form_messages.html' with errors=profile_form.errors %}
+      {% endif %}
+
+      {% if mobile_form.errors %}
+        {% include 'form_messages.html' with errors=mobile_form.errors %}
+      {% endif %}
+
+      {% include 'messages.html' %}
+      
+      {% block content %}
+      {% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+  </main>
+  <!-- MODALS -->
+
+  <!-- Reminder Modal -->
+  <div class="modal fade" id="reminder-modal" tabindex="-1" role="dialog" aria-labelledby="reminder-modal">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header bg-secondary">
+          <h5 class="modal-title has-icon text-white"> New Reminder</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+              aria-hidden="true">&times;</span></button>
+        </div>
+        <form>
+          <div class="modal-body">
+            <div class="ms-form-group">
+              <label>Remind me about</label>
+              <textarea class="form-control" name="reminder"></textarea>
+            </div>
+            <div class="ms-form-group">
+              <span class="ms-option-name fs-14">Repeat Daily</span>
+              <label class="ms-switch float-right">
+                <input type="checkbox">
+                <span class="ms-switch-slider round"></span>
+              </label>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="ms-form-group">
+                  <input type="text" class="form-control datepicker" name="reminder-date" value="" />
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="ms-form-group">
+                  <select class="form-control" name="reminder-time">
+                    <option value="">12:00 pm</option>
+                    <option value="">1:00 pm</option>
+                    <option value="">2:00 pm</option>
+                    <option value="">3:00 pm</option>
+                    <option value="">4:00 pm</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-secondary shadow-none" data-dismiss="modal">Add Reminder</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Notes Modal -->
+  <div class="modal fade" id="notes-modal" tabindex="-1" role="dialog" aria-labelledby="notes-modal">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header bg-secondary">
+          <h5 class="modal-title has-icon text-white" id="NoteModal">New Note</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+              aria-hidden="true">&times;</span></button>
+        </div>
+        <form>
+          <div class="modal-body">
+            <div class="ms-form-group">
+              <label>Note Title</label>
+              <input type="text" class="form-control" name="note-title" value="">
+            </div>
+            <div class="ms-form-group">
+              <label>Note Description</label>
+              <textarea class="form-control" name="note-description"></textarea>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-secondary shadow-none" data-dismiss="modal">Add Note</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="mymodal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog ms-modal-dialog-width">
+      <div class="modal-content ms-modal-content-width">
+        <div class="modal-header  ms-modal-header-radius-0">
+          <h4 class="modal-title text-white">Make An Appointment</h4>
+          <button type="button" class="close text-white" data-dismiss="modal" aria-hidden="true">x</button>
+
+        </div>
+        <div class="modal-body p-0 text-left">
+          <div class="col-xl-12 col-md-12">
+            <div class="ms-panel ms-panel-bshadow-none">
+              <div class="ms-panel-header">
+                <h6>Patient Information</h6>
+              </div>
+              <div class="ms-panel-body">
+                <form class="needs-validation" action="{% url 'appointments:new' %}" method="post">
+                  <div class="form-row">
+                    <div class="col-md-12 mb-3">
+                      <label for="validationCustom01">Patient Name</label>
+                      <div class="input-group">
+                        {{appointment_form.patient}}
+
+                      </div>
+                    </div>
+
+                  </div>
+
+                  <div class="form-row">
+                    <div class="col-md-12 mb-3">
+                      <label for="validationCustom01">Doctor Name</label>
+                      <div class="input-group">
+                        {{appointment_form.doctor}}
+
+                      </div>
+                    </div>
+
+                  </div>
+
+                  <div class="form-row">
+                    <div class="col-md-12 mb-3">
+                      <label for="validationCustom01">Status</label>
+                      <div class="input-group">
+                        {{appointment_form.status}}
+
+                      </div>
+                    </div>
+
+                  </div>
+
+                  <div class="form-row">
+                    <div class="col-md-12 mb-3">
+                      <label for="validationCustom01">Date</label>
+                      <div class="input-group">
+                        {{appointment_form.date_time}}
+
+                      </div>
+                    </div>
+
+                  </div>
+                  {% csrf_token %}
+                  <button class="btn btn-primary mt-4 d-inline w-20" type="submit">Add Appointment</button>
+                </form>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Modal -->
+  <div class="modal fade" id="prescription" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog ms-modal-dialog-width">
+      <div class="modal-content ms-modal-content-width">
+        <div class="modal-header  ms-modal-header-radius-0">
+          <h4 class="modal-title text-white">Make a prescription</h4>
+          <button type="button" class="close  text-white" data-dismiss="modal" aria-hidden="true">x</button>
+
+        </div>
+        <div class="modal-body p-0 text-left">
+          <div class="col-xl-12 col-md-12">
+            <div class="ms-panel ms-panel-bshadow-none">
+              <div class="ms-panel-header">
+                <h6>Prescription Information</h6>
+              </div>
+              <div class="ms-panel-body">
+                <form class="needs-validation" action="{% url 'patients:new_prescription' %}" method="post">
+                  <div class="form-row">
+                    <div class="col-md-12 mb-3">
+                      <label for="validationCustom09">Patient</label>
+                      <div class="input-group">
+                        {{prescription_form.patient}}
+
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-row">
+                    <div class="col-md-12 mb-3">
+                      <label for="validationCustom09">Notes</label>
+                      <div class="input-group">
+                        {{prescription_form.notes}}
+
+                      </div>
+                    </div>
+                  </div>
+                  {% csrf_token %}
+                  <button class="btn btn-primary mt-4 d-inline w-20" type="submit">Save</button>
+                </form>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Modal -->
+
+
+  <!-- SCRIPTS -->
+  <!-- Global Required Scripts Start -->
+  <script src="{% static 'assets/js/jquery-3.3.1.min.js' %}"></script>
+  <script src="{% static 'assets/js/popper.min.js' %}"></script>
+  <script src="{% static 'assets/js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'assets/js/perfect-scrollbar.js' %}"></script>
+  <script src="{% static 'assets/js/jquery-ui.min.js' %}"></script>
+
+
+  <!-- Global Required Scripts End -->
+  <script src="{% static 'assets/js/d3.v3.min.js' %}"></script>
+  <script src="{% static 'assets/js/topojson.v1.min.js' %}"></script>
+  <script src="{% static 'assets/js/datamaps.all.min.js' %}"></script>
+
+  <!-- Page Specific Scripts Start -->
+  <script src="{% static 'assets/js/slick.min.js' %}"></script>
+  <script src="{% static 'assets/js/moment.js' %}"></script>
+  <script src="{% static 'assets/js/jquery.webticker.min.js' %}"></script>
+  <script src="{% static 'assets/js/Chart.bundle.min.js' %}"></script>
+  <script src="{% static 'assets/js/index-chart.js' %}"></script>
+
+  <!-- Page Specific Scripts Finish -->
+  <script src="{% static 'assets/js/calendar.js' %}"></script>
+
+  <!-- medjestic core JavaScript -->
+  <script src="{% static 'assets/js/framework.js' %}"></script>
+  <!-- Settings -->
+  <script src="{% static 'assets/js/settings.js' %}"></script>
+</body>
+
+
+</html>
