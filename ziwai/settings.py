@@ -155,15 +155,3 @@ MESSAGE_TAGS = {
         messages.WARNING: 'alert-warning',
         messages.ERROR: 'alert-danger',
 }
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'URL': 'postgresql://postgres:vIXPcudRRBDgxWoG9YeJ@containers-us-west-63.railway.app:8051/railway',
-        'NAME': 'railway',
-        'USER': 'postgres',
-        'PASSWORD': 'vIXPcudRRBDgxWoG9YeJ',
-        'HOST': 'containers-us-west-63.railway.app',
-        'PORT': 8051,
-    }
-}

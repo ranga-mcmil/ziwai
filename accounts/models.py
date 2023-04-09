@@ -30,12 +30,12 @@ USER_TYPE = (
 class User(AbstractUser):
     email = models.EmailField(_('email address'), unique=True)
     mobile_number = models.CharField(max_length=250, null=True, unique=True)
-    address = models.CharField(max_length=50)
-    blood_group = models.CharField(max_length=50, choices=BLOOD_GROUPS)
+    address = models.CharField(max_length=50, null=True, blank=True)
+    blood_group = models.CharField(max_length=50, null=True, blank=True, choices=BLOOD_GROUPS)
     user_type = models.CharField(max_length=50, choices=USER_TYPE, default='Receptionist')
-    date_of_birth = models.DateField(null=True)
+    date_of_birth = models.DateField(null=True, blank=True)
     pic = ResizedImageField(size=[600, 600], crop=['top', 'left'], upload_to='images/')
-    sex = models.CharField(max_length=10, choices=SEX)
+    sex = models.CharField(max_length=10, choices=SEX, null=True, blank=True)
     
     def __str__(self):
         return f'{self.first_name} {self.last_name}'

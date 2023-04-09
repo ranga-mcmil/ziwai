@@ -64,22 +64,22 @@ class UserRegistrationForm(forms.ModelForm):
         }
     ))
 
-    address = forms.CharField(widget=forms.TextInput(
+    address = forms.CharField(required=False, widget=forms.TextInput(
         attrs={
             'class': 'form-control',
             'name': 'address',
         }
     ))
 
-    date_of_birth = forms.DateField(widget=DateInput)
+    date_of_birth = forms.DateField(required=False, widget=DateInput)
 
-    blood_group = forms.ChoiceField(choices=BLOOD_GROUPS, widget=forms.Select(
+    blood_group = forms.ChoiceField(required=False, choices=BLOOD_GROUPS, widget=forms.Select(
         attrs={
             'class': 'form-control',
         }
     ))
 
-    sex = forms.ChoiceField(choices=SEX, widget=forms.Select(
+    sex = forms.ChoiceField(required=False, choices=SEX, widget=forms.Select(
         attrs={
             'class': 'form-control',
         }

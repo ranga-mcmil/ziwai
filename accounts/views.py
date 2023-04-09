@@ -11,6 +11,7 @@ from appointments.models import Appointment
 from patients.models import PatientProfile, Prescription
 from doctors.models import DoctorProfile
 from payments.models import Payment
+from .forms import UserRegistrationForm
 
 # Create your views here.
 @login_required()
@@ -71,6 +72,24 @@ def login_view(request):
         form = LoginForm()
     context = {'form': form}
     return render(request, 'registration/login.html', context)
+
+
+def register(request):
+    if request.method == 'POST':
+        form = UserRegistrationForm(data=request.POST, files=request.FILES)
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.set_password(form.cleaned_data['password'])
+            user.user_type = 'Receptionist'
+            user.save()
+            login(request, user)
+            messages.success(request, f'You are now logged in as {user.get_full_name()}')
+            return redirect('accounts:home')
+
+    else:
+        form = UserRegistrationForm()
+
+    return render(request, 'registration/register.html', {'form': form})
 
 
 
